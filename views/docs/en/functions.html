@@ -1,0 +1,240 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>functions-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Functions</h1>
+
+<p> Stylus features powerful in-language function definitions. Function definitions appear identical to mixins; however, functions may return a value.</p>
+
+<h2>Return Values</h2>
+
+<p> Let&#39;s try a trivial example: creating a function that adds two numbers.</p>
+
+<pre><code>add(a, b)
+  a + b</code></pre>
+
+<p> We can then use this function in conditions, in property values, etc.</p>
+
+<pre><code> body 
+   padding add(10px, 5)</code></pre>
+
+<p> Rendering:</p>
+
+<pre><code> body {
+   padding: 15px;
+ }</code></pre>
+
+<h2>Argument Defaults</h2>
+
+<p> Optional arguments may default to a given expression. With Stylus we may even default arguments to earlier arguments! </p>
+
+<p> For example:</p>
+
+<pre><code> add(a, b = a)
+   a + b
+
+ add(10, 5)
+ // =&gt; 15
+
+ add(10)
+ // =&gt; 20</code></pre>
+
+<p><strong>Note:</strong> Since argument defaults are assignments, we can also use function calls for defaults:</p>
+
+<pre><code> add(a, b = unit(a, px))
+   a + b</code></pre>
+
+<h2>Named Parameters</h2>
+
+<p>Functions accept named parameters. This frees you from remembering the order of parameters, or simply improves the readability of your code.</p>
+
+<p>For example:</p>
+
+<pre><code>subtract(a, b)
+  a - b
+
+subtract(b: 10, a: 25)</code></pre>
+
+<h2>Function Bodies</h2>
+
+<p> We can take our simple <code>add()</code> function further. Let&#39;s casting all units passed as <code>px</code> via the <code>unit()</code> built-in. It reassigns each argument, and provides a unit-type string (or identifier), which ignores unit conversion.</p>
+
+<pre><code> add(a, b = a)
+   a = unit(a, px)
+   b = unit(b, px)
+   a + b
+
+ add(15%, 10deg)
+ // =&gt; 25</code></pre>
+
+<h2>Multiple Return Values</h2>
+
+<p> Stylus functions can return several values—just as you can assign several values to a variable. </p>
+
+<p> For example, the following is a valid assignment:</p>
+
+<pre><code>   sizes = 15px 10px
+
+   sizes[0]
+   // =&gt; 15px </code></pre>
+
+<p>Similarly, we may return several values:</p>
+
+<pre><code>   sizes()
+     15px 10px
+
+   sizes()[0]
+   // =&gt; 15px</code></pre>
+
+<p>One slight exception is when return values are identifiers. For example, the following looks like a property assignment to Stylus (since no operators are present):</p>
+
+<pre><code> swap(a, b)
+   b a</code></pre>
+
+<p>To disambiguate, we can either wrap with parentheses, or use the <code>return</code> keyword:</p>
+
+<pre><code>  swap(a, b)
+    (b a)
+
+  swap(a, b)
+    return b a</code></pre>
+
+<h2>Conditionals</h2>
+
+<p> Let&#39;s say we want to create a function named <code>stringish()</code> to determine whether the argument can be transformed to a string. We check if <code>val</code> is a string, or an ident (which is string-like). Because undefined identifiers yield themselves as the value, we may compare them to themselves as shown below (where <code>yes</code> and <code>no</code> are used in place of <code>true</code> and <code>false</code>):</p>
+
+<pre><code> stringish(val)
+   if val is a &#39;string&#39; or val is a &#39;ident&#39;
+     yes
+   else
+     no</code></pre>
+
+<p>Usage:</p>
+
+<pre><code> stringish(&#39;yay&#39;) == yes
+ // =&gt; true
+
+ stringish(yay) == yes
+ // =&gt; true
+
+ stringish(0) == no
+ // =&gt; true</code></pre>
+
+<p><strong>note</strong>: <code>yes</code> and <code>no</code> are not boolean literals. They are simply undefined identifiers in this case.</p>
+
+<p>Another example:</p>
+
+<pre><code>compare(a, b)
+  if a &gt; b
+    higher
+  else if a &lt; b
+    lower
+  else
+    equal</code></pre>
+
+<p>Usage:</p>
+
+<pre><code>compare(5, 2)
+// =&gt; higher
+
+compare(1, 5)
+// =&gt; lower
+
+compare(10, 10)
+// =&gt; equal</code></pre>
+
+<h2>Aliasing</h2>
+
+<p>  To alias a function, simply assign a function&#39;s name to a new identifier. For example, our <code>add()</code> function could be aliased as <code>plus()</code>, like so:</p>
+
+<pre><code>  plus = add
+
+  plus(1, 2)
+  // =&gt; 3</code></pre>
+
+<h2>Variable Functions</h2>
+
+<p>  In the same way that we can &quot;alias&quot; a function, we can pass a function as well. Here, our <code>invoke()</code> function accepts a function, so we can pass it <code>add()</code> or <code>sub()</code>.</p>
+
+<pre><code>add(a, b)
+  a + b
+
+sub(a, b)
+  a - b
+
+invoke(a, b, fn)
+  fn(a, b)
+
+body
+  padding invoke(5, 10, add)
+  padding invoke(5, 10, sub)</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>body {
+  padding: 15;
+  padding: -5;
+}</code></pre>
+
+<h2>Anonymous functions</h2>
+
+<p>You can use anonymous functions where needed using <code>@(){}</code> syntax. Here is how you could use it to create a custom <code>sort()</code> function:</p>
+
+<pre><code>sort(list, fn = null)
+  // default sort function
+  if fn == null
+    fn = @(a, b) {
+      a &gt; b
+    }
+
+  // bubble sort
+  for $i in 1..length(list) - 1
+    for $j in 0..$i - 1
+      if fn(list[$j], list[$i])
+        $temp = list[$i]
+        list[$i] = list[$j]
+        list[$j] = $temp
+  return list
+
+  sort(&#39;e&#39; &#39;c&#39; &#39;f&#39; &#39;a&#39; &#39;b&#39; &#39;d&#39;)
+  // =&gt; &#39;a&#39; &#39;b&#39; &#39;c&#39; &#39;d&#39; &#39;e&#39; &#39;f&#39;
+
+  sort(5 3 6 1 2 4, @(a, b){
+    a &lt; b
+  })
+  // =&gt; 6 5 4 3 2 1</code></pre>
+
+<h2>arguments</h2>
+
+<p> The <code>arguments</code> local is available to all function bodies, and contains all the arguments passed. </p>
+
+<p> For example:</p>
+
+<pre><code> sum()
+   n = 0
+   for num in arguments
+     n = n + num
+
+ sum(1,2,3,4,5)
+ // =&gt; 15</code></pre>
+
+<h2>Hash Example</h2>
+
+<p> Below we define the <code>get(hash, key)</code> function, which returns the
+ value of <code>key</code> (or <code>null</code>). We iterate each <code>pair</code> in <code>hash</code>, returning the pair&#39;s second node when the first (the <code>key</code>) matches. </p>
+
+<pre><code>  get(hash, key)
+    return pair[1] if pair[0] == key for pair in hash</code></pre>
+
+<p>As demonstrated below, in-language functions—paired with robust Stylus expressions—can provide great flexibility:</p>
+
+<pre><code>  hash = (one 1) (two 2) (three 3)
+
+  get(hash, two)
+  // =&gt; 2
+
+  get(hash, three)
+  // =&gt; 3
+
+  get(hash, something)
+  // =&gt; null</code></pre></div></body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>font-face-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>@font-face</h1>
+
+<p> The <code>@font-face</code> at-rule expects as you would expect. Simply add a block of properties after it, like so:</p>
+
+<pre><code> @font-face
+   font-family Geo
+   font-style normal
+   src url(fonts/geo_sans_light/GensansLight.ttf)
+
+ .ingeo
+   font-family Geo</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>  @font-face {
+    font-family: Geo;
+    font-style: normal;
+    src: url(&quot;fonts/geo_sans_light/GensansLight.ttf&quot;);
+  }
+  .ingeo {
+    font-family: Geo;
+  }</code></pre></div></body></html>

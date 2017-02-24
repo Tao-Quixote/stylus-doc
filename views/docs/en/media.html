@@ -1,0 +1,116 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>media-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>@media</h1>
+
+<p> The <code>@media</code> queries work just as they do within regular CSS, but with Stylus&#39;s block notation:</p>
+
+<pre><code> @media print
+   #header
+   #footer
+     display none</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>  @media print {
+    #header,
+    #footer {
+      display: none;
+    }
+  }</code></pre>
+
+<h2>Media Query Bubbling</h2>
+
+<p>Media queries can be nested, too, and they will be expanded to wrap the context in which they are used. For example:</p>
+
+<pre><code>.widget
+  padding 10px
+
+  @media screen and (min-width: 600px)
+    padding 20px</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>.widget {
+  padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .widget {
+    padding: 20px;
+  }
+}</code></pre>
+
+<h2>Nested media queries</h2>
+
+<p>You can nest <code>@media</code>s one into another and they would combine into one:</p>
+
+<pre><code>@media (max-width: 500px)
+  .foo
+    color: #000
+
+  @media (min-width: 100px), (min-height: 200px)
+    .foo
+      color: #100</code></pre>
+
+<p>Would yield to</p>
+
+<pre><code>@media (max-width: 500px) {
+  .foo {
+    color: #000;
+  }
+}
+@media (max-width: 500px) and (min-width: 100px), (max-width: 500px) and (min-height: 200px) {
+  .foo {
+    color: #100;
+  }
+}</code></pre>
+
+<h2>Interpolations and variables</h2>
+
+<p>You can use both interpolations and variables inside media queries, so it is possible to do things like this:</p>
+
+<pre><code>foo = &#39;width&#39;
+bar = 30em
+@media (max-{foo}: bar)
+  body
+    color #fff</code></pre>
+
+<p>This would yield</p>
+
+<pre><code>@media (max-width: 30em) {
+  body {
+    color: #fff;
+  }
+}</code></pre>
+
+<p>It is also possible to use expressions inside MQ:</p>
+
+<pre><code>.foo
+  for i in 1..4
+    @media (min-width: 2**(i+7)px)
+      width: 100px*i</code></pre>
+
+<p>would yield to</p>
+
+<pre><code>@media (min-width: 256px) {
+  .foo {
+    width: 100px;
+  }
+}
+@media (min-width: 512px) {
+  .foo {
+    width: 200px;
+  }
+}
+@media (min-width: 1024px) {
+  .foo {
+    width: 300px;
+  }
+}
+@media (min-width: 2048px) {
+  .foo {
+    width: 400px;
+  }
+}</code></pre></div></body></html>

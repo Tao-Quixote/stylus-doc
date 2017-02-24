@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>comments-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Comments</h1>
+
+<p>  Stylus supports three kinds of comments: single-line, and multi-line comments, and multi-line buffered comments.</p>
+
+<h2>Single-line</h2>
+
+<p>  Single-line comments look like JavaScript comments, and do not output in the resulting CSS:</p>
+
+<pre><code>// I&#39;m a comment!
+body
+  padding 5px // some awesome padding</code></pre>
+
+<h2>Multi-line</h2>
+
+<p>   Multi-line comments look identical to regular CSS comments. However, they only output when the <code>compress</code> option is not enabled.</p>
+
+<pre><code>/*
+ * Adds the given numbers together.
+ */
+
+add(a, b)
+  a + b</code></pre>
+
+<h2>Multi-line buffered</h2>
+
+<p>   Multi-line comments which are not suppressed start with <code>/*!</code>. This tells Stylus to output the comment regardless of compression.</p>
+
+<pre><code>/*!
+ * Adds the given numbers together.
+ */
+
+add(a, b)
+  a + b</code></pre></div></body></html>
