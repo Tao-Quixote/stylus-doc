@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>kwargs-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Keyword Arguments</h1>
+
+<p> Stylus supports keyword arguments, or &quot;kwargs&quot;. These allow you to reference arguments by their associated parameter name.</p>
+
+<p> The examples shown below are functionally equivalent. However, we can
+ place keyword arguments anywhere within the list. The remaining arguments
+ that are <em>not</em> keyed will be applied to the parameters that have not
+ been satisfied.</p>
+
+<pre><code>  body {
+    color: rgba(255, 200, 100, 0.5);
+    color: rgba(red: 255, green: 200, blue: 100, alpha: 0.5);
+    color: rgba(alpha: 0.5, blue: 100, red: 255, 200);
+    color: rgba(alpha: 0.5, blue: 100, 255, 200);
+  }</code></pre>
+
+<p> Yielding:</p>
+
+<pre><code>   body {
+     color: rgba(255,200,100,0.5);
+     color: rgba(255,200,100,0.5);
+     color: rgba(255,200,100,0.5);
+     color: rgba(255,200,100,0.5);
+   }</code></pre>
+
+<p> To see what parameters a function or mixin accept, use the <code>p()</code> function:</p>
+
+<pre><code>p(rgba)</code></pre>
+
+<p> Yielding:</p>
+
+<pre><code>inspect: rgba(red, green, blue, alpha)</code></pre></div></body></html>

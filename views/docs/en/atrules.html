@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>atrules-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Other @-rules</h1>
+
+<p>Stylus have a basic support for braceless syntax for most of the CSS @-rules, like <code>@viewport</code>, <code>@page</code>, <code>@host</code>, <code>@supports</code> and others:</p>
+
+<pre><code>@viewport
+  color: #00f
+
+@supports (display: flex)
+  div
+    display: flex
+
+@page :blank
+  @top-center
+    content: none</code></pre>
+
+<p>Would compile to</p>
+
+<pre><code>@viewport {
+  color: #00f;
+}
+@supports (display: flex) {
+  div {
+    display: flex;
+  }
+}
+@page :blank {
+  @top-center {
+    content: none;
+  }
+}</code></pre>
+
+<h2>Unknown at-rules</h2>
+
+<p>Stylus supports any yet unknown @-rules, so it is future-friendly, as any new at-rules in CSS could be written in indentation-based syntax of Stylus and would be rendered perfectly:</p>
+
+<pre><code>@foo
+  @bar
+    width: 10px
+
+    .baz
+      height: 10px</code></pre>
+
+<p>Would be compiled to</p>
+
+<pre><code>@foo {
+  @bar {
+    width: 10px;
+    .baz {
+      height: 10px;
+    }
+  }
+}</code></pre></div></body></html>

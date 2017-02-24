@@ -1,0 +1,1239 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>bifs-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Built-in Functions</h1>
+
+<h2>red(color[, value])</h2>
+
+<p>Return the red component of the given <code>color</code>, or set the red component to the optional second <code>value</code> argument.</p>
+
+<pre><code> red(#c00)
+ // =&gt; 204
+
+ red(#000, 255)
+ // =&gt; #f00</code></pre>
+
+<h2>green(color[, value])</h2>
+
+<p>Return the green component of the given <code>color</code>, or set the green component to the optional second <code>value</code> argument.</p>
+
+<pre><code> green(#0c0)
+ // =&gt; 204
+
+ green(#000, 255)
+ // =&gt; #0f0</code></pre>
+
+<h2>blue(color[, value])</h2>
+
+<p>Return the blue component of the given <code>color</code>, or set the blue component to the optional second <code>value</code> argument.</p>
+
+<pre><code> blue(#00c)
+ // =&gt; 204
+
+ blue(#000, 255)
+ // =&gt; #00f</code></pre>
+
+<h2>alpha(color[, value])</h2>
+
+<p>Return the alpha component of the given <code>color</code>, or set the alpha component to the optional second <code>value</code> argument.</p>
+
+<pre><code>  alpha(#fff)
+  // =&gt; 1
+
+  alpha(rgba(0,0,0,0.3))
+  // =&gt; 0.3
+
+  alpha(#fff, 0.5)
+  // =&gt; rgba(255,255,255,0.5)</code></pre>
+
+<h2>dark(color)</h2>
+
+<p>Check if <code>color</code> is dark:</p>
+
+<pre><code>  dark(black)
+  // =&gt; true
+
+  dark(#005716)
+  // =&gt; true
+
+  dark(white)
+  // =&gt; false</code></pre>
+
+<h2>light(color)</h2>
+
+<p>Check if <code>color</code> is light:</p>
+
+<pre><code>light(black)
+// =&gt; false
+
+light(white)
+// =&gt; true
+
+light(#00FF40)
+// =&gt; true</code></pre>
+
+<h2>hue(color[, value])</h2>
+
+<p>Return the hue of the given <code>color</code>, or set the hue component to the optional second <code>value</code> argument.</p>
+
+<pre><code>hue(hsl(50deg, 100%, 80%))
+// =&gt; 50deg
+
+hue(#00c, 90deg)
+// =&gt; #6c0</code></pre>
+
+<h2>saturation(color[, value])</h2>
+
+<p>Return the saturation of the given <code>color</code>, or set the saturation component to the optional second <code>value</code> argument.</p>
+
+<pre><code>saturation(hsl(50deg, 100%, 80%))
+// =&gt; 100%
+
+saturation(#00c, 50%)
+// =&gt; #339</code></pre>
+
+<h2>lightness(color[, value])</h2>
+
+<p>Return the lightness of the given <code>color</code>, or set the lightness component to the optional second <code>value</code> argument.</p>
+
+<pre><code>lightness(hsl(50deg, 100%, 80%))
+// =&gt; 80%
+
+lightness(#00c, 80%)
+// =&gt; #99f</code></pre>
+
+<h2>push(expr, args...)</h2>
+
+<p> Push the given <code>args</code> to <code>expr</code>.</p>
+
+<pre><code> nums = 1 2
+ push(nums, 3, 4, 5)
+
+ nums
+ // =&gt; 1 2 3 4 5</code></pre>
+
+<p> Aliased as <code>append()</code></p>
+
+<h2>pop(expr)</h2>
+
+<p> Pop a value from <code>expr</code>.</p>
+
+<pre><code> nums = 4 5 3 2 1
+ num = pop(nums)
+
+ nums
+ // =&gt; 4 5 3 2
+ num
+ // =&gt; 1</code></pre>
+
+<h2>shift(expr)</h2>
+
+<p> Shift an element from <code>expr</code>.</p>
+
+<pre><code> nums = 4 5 3 2 1
+ num = shift(nums)
+
+ nums
+ // =&gt; 5 3 2 1
+ num
+ // =&gt; 4</code></pre>
+
+<h2>unshift(expr, args...)</h2>
+
+<p> Unshift the given <code>args</code> to <code>expr</code>.</p>
+
+<pre><code> nums = 4 5
+ unshift(nums, 3, 2, 1)
+
+ nums
+ // =&gt; 1 2 3 4 5</code></pre>
+
+<p> Aliased as <code>prepend()</code></p>
+
+<h2>index(list, value)</h2>
+
+<p>  Returns the index (zero-based) of a <code>value</code> within a <code>list</code>.</p>
+
+<pre><code>list = 1 2 3
+
+index(list, 2)
+// =&gt; 1
+
+index(1px solid red, red)
+// =&gt; 2</code></pre>
+
+<h2>keys(pairs)</h2>
+
+<p>  Return keys in the given <code>pairs</code>:</p>
+
+<pre><code> pairs = (one 1) (two 2) (three 3)
+ keys(pairs)
+ // =&gt; one two three</code></pre>
+
+<h2>values(pairs)</h2>
+
+<p>  Return values in the given <code>pairs</code>:</p>
+
+<pre><code> pairs = (one 1) (two 2) (three 3)
+ values(pairs)
+ // =&gt; 1 2 3</code></pre>
+
+<h2>list-separator(list)</h2>
+
+<p>  Return the separator of the given <code>list</code>.</p>
+
+<pre><code> list1 = a b c
+ list-separator(list1)
+ // =&gt; &#39; &#39;
+
+ list2 = a, b, c
+ list-separator(list2)
+ // =&gt; &#39;,&#39;</code></pre>
+
+<h2>typeof(node)</h2>
+
+<p>Return type of <code>node</code> as a string.</p>
+
+<pre><code>  type(12)
+  // =&gt; &#39;unit&#39;
+
+  typeof(12)
+  // =&gt; &#39;unit&#39;
+
+  typeof(#fff)
+  // =&gt; &#39;rgba&#39;
+
+  type-of(#fff)
+  // =&gt; &#39;rgba&#39;</code></pre>
+
+<p>Aliased as <code>type-of</code> and <code>type</code>.</p>
+
+<h2>unit(unit[, type])</h2>
+
+<p>Return a string for the type of <code>unit</code> or an empty string,
+or assign the given <code>type</code> without unit conversion.</p>
+
+<pre><code>unit(10)
+// =&gt; &#39;&#39;
+
+unit(15in)
+// =&gt; &#39;in&#39;
+
+unit(15%, &#39;px&#39;)
+// =&gt; 15px
+
+unit(15%, px)
+// =&gt; 15px</code></pre>
+
+<h2>percentage(num)</h2>
+
+<p>Convert a <code>num</code> to a percentage.</p>
+
+<pre><code>percentage(.5)
+// =&gt; 50%
+
+percentage(4 / 100)
+// =&gt; 4%</code></pre>
+
+<h2>abs(unit)</h2>
+
+<pre><code>  abs(-5px)
+  // =&gt; 5px
+
+  abs(5px)
+  // =&gt; 5px</code></pre>
+
+<h2>ceil(unit)</h2>
+
+<pre><code>  ceil(5.5in)
+  // =&gt; 6in</code></pre>
+
+<h2>floor(unit)</h2>
+
+<pre><code>  floor(5.6px)
+  // =&gt; 5px</code></pre>
+
+<h2>round(unit)</h2>
+
+<pre><code>  round(5.5px)
+  // =&gt; 6px
+
+  round(5.4px)
+  // =&gt; 5px</code></pre>
+
+<p><strong>Note:</strong> All rounding functions can accept optional <code>precision</code> argument — you can pass the number of digits you want to save after the period:</p>
+
+<pre><code>  ceil(5.52px,1)
+  // =&gt; 5.6px
+
+  floor(5.57px,1)
+  // =&gt; 5.5px
+
+  round(5.52px,1)
+  // =&gt; 5.5px</code></pre>
+
+<h2>sin(angle)</h2>
+
+<p>Returns the value of sine for the given <code>angle</code>. If the angle is given as a degree unit, like <code>45deg</code>, it is treated as a degree, otherwise it is treated as radians.</p>
+
+<pre><code>sin(30deg)
+// =&gt; 0.5
+
+sin(3*PI/4)
+// =&gt; 0.707106781</code></pre>
+
+<h2>cos(angle)</h2>
+
+<p>Returns the value of cosine for the given <code>angle</code>. If the angle is given as a degree unit, like <code>45deg</code>, it is treated as a degree, otherwise it is treated as radians.</p>
+
+<pre><code>cos(180deg)
+// =&gt; -1</code></pre>
+
+<h2>tan(angle)</h2>
+
+<p>Returns the value of tangent for the given <code>angle</code>. If the angle is given as a degree unit, like <code>45deg</code>, it is treated as a degree, otherwise it is treated as radians.</p>
+
+<pre><code>tan(45deg)
+// =&gt; 1
+
+tan(90deg)
+// =&gt; Infinity</code></pre>
+
+<h2>min(a, b)</h2>
+
+<pre><code>  min(1, 5)
+  // =&gt; 1</code></pre>
+
+<h2>max(a, b)</h2>
+
+<pre><code>  max(1, 5)
+  // =&gt; 5</code></pre>
+
+<h2>even(unit)</h2>
+
+<pre><code>  even(6px)
+  // =&gt; true</code></pre>
+
+<h2>odd(unit)</h2>
+
+<pre><code>  odd(5mm)
+  // =&gt; true</code></pre>
+
+<h2>sum(nums)</h2>
+
+<pre><code>  sum(1 2 3)
+  // =&gt; 6</code></pre>
+
+<h2>avg(nums)</h2>
+
+<pre><code> avg(1 2 3)
+ // =&gt; 2</code></pre>
+
+<h2>range(start, stop[, step])</h2>
+
+<p>Returns a list of units from <code>start</code> to <code>stop</code> (included) by given <code>step</code>. If <code>step</code>
+argument is omitted, it defaults to 1. The <code>step</code> must not be zero.</p>
+
+<pre><code>range(1, 6)
+// equals to `1..6`
+// 1 2 3 4 5 6
+
+range(1, 6, 2)
+// 1 3 5
+
+range(-6, -1, 2)
+// -6 -4 -2
+
+range(1px, 3px, 0.5px)
+// 1px 1.5px 2px 2.5px 3px</code></pre>
+
+<p>It is most often used in <code>for</code> loops:</p>
+
+<pre><code>for i in range(10px, 50px, 10)
+  .col-{i}
+    width: i</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>.col-10 {
+  width: 10px;
+}
+.col-20 {
+  width: 20px;
+}
+.col-30 {
+  width: 30px;
+}
+.col-40 {
+  width: 40px;
+}
+.col-50 {
+  width: 50px;
+}</code></pre>
+
+<h2>base-convert(num, base, width)</h2>
+
+<p>Returns a <code>Literal</code> <code>num</code> converted to the provided <code>base</code>, padded to <code>width</code> with zeroes (default width is 2)</p>
+
+<pre><code>base-convert(1, 10, 3)
+// =&gt; 001
+
+base-convert(14, 16, 1)
+// =&gt; e
+
+base-convert(42, 2)
+// =&gt; 101010</code></pre>
+
+<h2>match(pattern, string[, flags])</h2>
+
+<p>Retrieves the matches when matching a <code>val</code>(string) against a <code>pattern</code>(regular expression).</p>
+
+<pre><code>match(&#39;^(height|width)?([&lt;&gt;=]{1,})(.*)&#39;, &#39;height&gt;=1024px&#39;)
+// =&gt; &#39;height&gt;=1024px&#39; &#39;height&#39; &#39;&gt;=&#39; &#39;1024px&#39;
+
+match(&#39;^foo(?:bar)?&#39;, &#39;foo&#39;)
+// =&gt; &#39;foo&#39;
+
+match(&#39;^foo(?:bar)?&#39;, &#39;foobar&#39;)
+// =&gt; &#39;foobar&#39;
+
+match(&#39;^foo(?:bar)?&#39;, &#39;bar&#39;)
+// =&gt; null
+
+match(&#39;ain&#39;, &#39;The rain in SPAIN stays mainly in the plain&#39;)
+// =&gt; &#39;ain&#39;
+
+match(&#39;ain&#39;, &#39;The rain in SPAIN stays mainly in the plain&#39;, g)
+// =&gt; &#39;ain&#39; &#39;ain&#39; &#39;ain&#39;
+
+match(&#39;ain&#39;, &#39;The rain in SPAIN stays mainly in the plain&#39;, &#39;gi&#39;)
+// =&gt; &#39;ain&#39; &#39;AIN&#39; &#39;ain&#39; &#39;ain&#39;</code></pre>
+
+<h2>replace(pattern, replacement, val)</h2>
+
+<p>Returns string with all matches of <code>pattern</code> replaced by <code>replacement</code> in given <code>val</code></p>
+
+<pre><code>replace(i, e, &#39;griin&#39;)
+// =&gt; &#39;green&#39;
+
+replace(i, e, griin)
+// =&gt; #008000</code></pre>
+
+<h2>join(delim, vals...)</h2>
+
+<p>  Join the given <code>vals</code> with <code>delim</code>.</p>
+
+<pre><code>  join(&#39; &#39;, 1 2 3)
+  // =&gt; &quot;1 2 3&quot;
+
+  join(&#39;,&#39;, 1 2 3)
+  // =&gt; &quot;1,2,3&quot;
+
+  join(&#39;, &#39;, foo bar baz)
+  // =&gt; &quot;foo, bar, baz&quot;
+
+  join(&#39;, &#39;, foo, bar, baz)
+  // =&gt; &quot;foo, bar, baz&quot;
+
+  join(&#39;, &#39;, 1 2, 3 4, 5 6)
+  // =&gt; &quot;1 2, 3 4, 5 6&quot;</code></pre>
+
+<h2>split(delim, val)</h2>
+
+<p>The <code>split()</code>` method splits a string/ident into an array of strings by separating the string into substrings.</p>
+
+<pre><code>split(_, bar1_bar2_bar3)
+// =&gt; bar1 bar2 bar3
+
+split(_, &#39;bar1_bar2_bar3&#39;)
+// =&gt; &#39;bar1&#39; &#39;bar2&#39; &#39;bar3&#39;</code></pre>
+
+<h2>substr(val, start, length)</h2>
+
+<p>The <code>substr()</code> method returns the characters in a string beginning at the specified location through the specified number of characters.</p>
+
+<pre><code>substr(ident, 1, 2)
+// =&gt; de
+
+substr(&#39;string&#39;, 1, 2)
+// =&gt; &#39;tr&#39;
+
+val = dredd
+substr(substr(val, 1), 0, 3)
+// =&gt; #f00</code></pre>
+
+<h2>slice(val, start[, end])</h2>
+
+<p>The <code>slice()</code> method extracts a section of a string/list and returns a new string/list.</p>
+
+<p>  slice(&#39;lorem&#39; &#39;ipsum&#39; &#39;dolor&#39;, 1, 2)
+  slice(&#39;lorem&#39; &#39;ipsum&#39; &#39;dolor&#39;, 1, -1)
+  // =&gt; &#39;ipsum&#39;</p>
+
+<p>  slice(&#39;lorem ipsum&#39;, 1, 5)
+  // =&gt; &#39;orem&#39;
+  slice(rredd, 1, -1)
+  // =&gt; #f00</p>
+
+<p>  slice(1px solid black, 1)
+  // =&gt; solid #000</p>
+
+<h2>hsla(color | h,s,l,a)</h2>
+
+<p>Convert the given <code>color</code> to an <code>HSLA</code> node,
+or h,s,l,a component values.</p>
+
+<pre><code> hsla(10deg, 50%, 30%, 0.5)
+ // =&gt; HSLA
+
+ hsla(#ffcc00)
+ // =&gt; HSLA</code></pre>
+
+<h2>hsl(color | h,s,l)</h2>
+
+<p>Convert the given <code>color</code> to an <code>HSLA</code> node,
+or h,s,l,a component values.</p>
+
+<pre><code> hsl(10, 50, 30)
+ // =&gt; HSLA
+
+ hsl(#ffcc00)
+ // =&gt; HSLA</code></pre>
+
+<h2>rgba(color | r,g,b,a)</h2>
+
+<p>Return <code>RGBA</code> from the r,g,b,a channels or provide a <code>color</code> to tweak the alpha.</p>
+
+<pre><code>  rgba(255,0,0,0.5)
+  // =&gt; rgba(255,0,0,0.5)
+
+  rgba(255,0,0,1)
+  // =&gt; #ff0000
+
+  rgba(#ffcc00, 0.5)
+  // rgba(255,204,0,0.5)</code></pre>
+
+<p> Alternatively stylus supports the <code>#rgba</code> and <code>#rrggbbaa</code> notations as well:</p>
+
+<pre><code>#fc08
+// =&gt; rgba(255,204,0,0.5)
+
+#ffcc00ee
+// =&gt; rgba(255,204,0,0.9)</code></pre>
+
+<h2>rgb(color | r,g,b)</h2>
+
+<p>Return a <code>RGBA</code> from the r,g,b channels or cast to an <code>RGBA</code> node.</p>
+
+<pre><code>rgb(255,204,0)
+// =&gt; #ffcc00
+
+rgb(#fff)
+// =&gt; #fff</code></pre>
+
+<h2>blend(top[, bottom])</h2>
+
+<p>Blends the given <code>top</code> color over the <code>bottom</code> one using the normal blending. The <code>bottom</code> argument is optional and is defaulted to <code>#fff</code>.</p>
+
+<pre><code>blend(rgba(#FFF, 0.5), #000)
+// =&gt; #808080
+
+blend(rgba(#FFDE00,.42), #19C261)
+// =&gt; #7ace38
+
+blend(rgba(lime, 0.5), rgba(red, 0.25))
+// =&gt; rgba(128,128,0,0.625)</code></pre>
+
+<h2>lighten(color, amount)</h2>
+
+<p>Lighten the given <code>color</code> by <code>amount</code>. This function is
+unit-sensitive, for example supporting percentages as shown
+below.</p>
+
+<pre><code>lighten(#2c2c2c, 30)
+// =&gt; #787878
+
+lighten(#2c2c2c, 30%)
+// =&gt; #393939</code></pre>
+
+<h2>darken(color, amount)</h2>
+
+<p>Darken the given <code>color</code> by <code>amount</code>.This function is
+unit-sensitive, for example supporting percentages as shown
+below.</p>
+
+<pre><code>darken(#D62828, 30)
+// =&gt; #551010
+
+darken(#D62828, 30%)
+// =&gt; #961c1c</code></pre>
+
+<h2>desaturate(color, amount)</h2>
+
+<p>Desaturate the given <code>color</code> by <code>amount</code>.</p>
+
+<pre><code>desaturate(#f00, 40%)
+// =&gt; #c33</code></pre>
+
+<h2>saturate(color, amount)</h2>
+
+<p>Saturate the given <code>color</code> by <code>amount</code>.</p>
+
+<pre><code>saturate(#c33, 40%)
+// =&gt; #f00</code></pre>
+
+<h2>complement(color)</h2>
+
+<p>Gives the complementary color. Equals to spinning hue to 180deg.</p>
+
+<pre><code>complement(#fd0cc7)
+// =&gt; #0cfd42</code></pre>
+
+<h2>invert(color)</h2>
+
+<p>Inverts the color. The red, green, and blue values are inverted, while the opacity is left alone.</p>
+
+<pre><code>invert(#d62828)
+// =&gt; #29d7d7</code></pre>
+
+<h2>spin(color, amount)</h2>
+
+<p>Spins hue of the given <code>color</code> by <code>amount</code>.</p>
+
+<pre><code> spin(#ff0000, 90deg)
+ // =&gt; #80ff00</code></pre>
+
+<h2>grayscale(color)</h2>
+
+<p>Gives the grayscale equivalent of the given color. Equals to desaturate by 100%.</p>
+
+<pre><code>grayscale(#fd0cc7)
+// =&gt; #0cfd42</code></pre>
+
+<h2>mix(color1, color2[, amount])</h2>
+
+<p>Mix two colors by a given amount. The <code>amount</code> is optional and is defaulted to <code>50%</code>.</p>
+
+<pre><code>mix(#000, #fff, 30%)
+// =&gt; #b2b2b2</code></pre>
+
+<h2>tint(color, amount)</h2>
+
+<p>Mix the given color with white.</p>
+
+<pre><code>tint(#fd0cc7,66%)
+// =&gt; #feaceb</code></pre>
+
+<h2>shade(color, amount)</h2>
+
+<p>Mix the given color with black.</p>
+
+<pre><code>shade(#fd0cc7,66%)
+// =&gt; #560443</code></pre>
+
+<h2>luminosity(color)</h2>
+
+<p>Returns the <a href="http://www.w3.org/TR/WCAG20/#relativeluminancedef">relative luminance</a> of the given <code>color</code>.</p>
+
+<pre><code>luminosity(white)
+// =&gt; 1
+
+luminosity(#000)
+// =&gt; 0
+
+luminosity(red)
+// =&gt; 0.2126</code></pre>
+
+<h2>contrast(top[, bottom])</h2>
+
+<p>Returns the <a href="http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef">contrast ratio</a> object between <code>top</code> and <code>bottom</code> colors, based on <a href="https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js#L108">script</a> underlying “<a href="http://leaverou.github.io/contrast-ratio/">contrast ratio</a>” tool by Lea Verou.</p>
+
+<p>The second argument is optional and is defaulted to <code>#fff</code>.</p>
+
+<p>The main key in the returned object is <code>ratio</code>, it also have <code>min</code> and <code>max</code> values that are different from the <code>ratio</code> only when the <code>bottom</code> color is transparent. In that case the <code>error</code> also contains an error margin.</p>
+
+<pre><code>contrast(#000, #fff).ratio
+=&gt; 21
+contrast(#000, rgba(#FFF, 0.5))
+=&gt; { &quot;ratio&quot;: &quot;13.15;&quot;, &quot;error&quot;: &quot;-7.85&quot;, &quot;min&quot;: &quot;5.3&quot;, &quot;max&quot;: &quot;21&quot; }</code></pre>
+
+<h2>transparentify(top[, bottom, alpha])</h2>
+
+<p>Returns the transparent version of the given <code>top</code> color, as if it was blend over the given <code>bottom</code> color (or the closest to it, if it is possible).</p>
+
+<p>The second argument is optional and is defaulted to <code>#fff</code>.</p>
+
+<p>The third argument is optional and overrides the autodetected alpha.</p>
+
+<pre><code>transparentify(#808080)
+=&gt; rgba(0,0,0,0.5)
+
+transparentify(#414141, #000)
+=&gt; rgba(255,255,255,0.25)
+
+transparentify(#91974C, #F34949, 0.5)
+=&gt; rgba(47,229,79,0.5)</code></pre>
+
+<h2>unquote(str | ident)</h2>
+
+<p>  Unquote the given <code>str</code> and returned as a <code>Literal</code> node.</p>
+
+<pre><code>   unquote(&quot;sans-serif&quot;)
+   // =&gt; sans-serif
+
+   unquote(sans-serif)
+   // =&gt; sans-serif
+
+   unquote(&#39;1px / 2px&#39;)
+   // =&gt; 1px / 2px</code></pre>
+
+<h2>convert(str)</h2>
+
+<p>  Like <code>unquote()</code> but tries to convert the given <code>str</code> to a Stylus node.</p>
+
+<pre><code>   unit = convert(&#39;40px&#39;)
+   typeof(unit)
+   // =&gt; &#39;unit&#39;
+
+   color = convert(&#39;#fff&#39;)
+   typeof(color)
+   // =&gt; &#39;rgba&#39;
+
+   foo = convert(&#39;foo&#39;)
+   typeof(foo)
+   // =&gt; &#39;ident&#39;</code></pre>
+
+<h2>s(fmt, ...)</h2>
+
+<p> The <code>s()</code> function is similar to <code>unquote()</code>, in that it returns
+ a <code>Literal</code> node, however it accepts a format string much like C&#39;s <code>sprintf()</code>. Currently the only specifier is <code>%s</code>.</p>
+
+<pre><code>    s(&#39;bar()&#39;);
+    // =&gt; bar()
+
+    s(&#39;bar(%s)&#39;, &#39;baz&#39;);
+    // =&gt; bar(&quot;baz&quot;)
+
+    s(&#39;bar(%s)&#39;, baz);
+    // =&gt; bar(baz)
+
+    s(&#39;bar(%s)&#39;, 15px);
+    // =&gt; bar(15px)
+
+    s(&#39;rgba(%s, %s, %s, 0.5)&#39;, 255, 100, 50);
+    // =&gt; rgba(255, 100, 50, 0.5)
+
+    s(&#39;bar(%Z)&#39;, 15px);
+    // =&gt; bar(%Z)
+
+    s(&#39;bar(%s, %s)&#39;, 15px);
+    // =&gt; bar(15px, null)</code></pre>
+
+<p>Check out the <code>%</code> string operator for equivalent behaviour.</p>
+
+<h2>basename(path[, ext])</h2>
+
+<p>Returns the basename of <code>path</code>, (optionally) with <code>ext</code> extension removed.</p>
+
+<pre><code>basename(&#39;images/foo.png&#39;)
+// =&gt; &quot;foo.png&quot;
+
+basename(&#39;images/foo.png&#39;, &#39;.png&#39;)
+// =&gt; &quot;foo&quot;</code></pre>
+
+<h2>dirname(path)</h2>
+
+<p>Returns the dirname of <code>path</code>.</p>
+
+<pre><code>dirname(&#39;images/foo.png&#39;)
+// =&gt; &quot;images&quot;</code></pre>
+
+<h2>extname(path)</h2>
+
+<p>Returns the filename extension of <code>path</code> including the dot.</p>
+
+<pre><code>extname(&#39;images/foo.png&#39;)
+// =&gt; &quot;.png&quot;</code></pre>
+
+<h2>pathjoin(...)</h2>
+
+<p>Peform a path join.</p>
+
+<pre><code>pathjoin(&#39;images&#39;, &#39;foo.png&#39;)
+// =&gt; &quot;images/foo.png&quot;
+
+path = &#39;images/foo.png&#39;
+ext = extname(path)
+pathjoin(dirname(path), basename(path, ext) + _thumb + ext)
+// =&gt; &#39;images/foo_thumb.png&#39;</code></pre>
+
+<h2><code>called-from</code> property</h2>
+
+<p><code>called-from</code> property contains the list of the functions the current function was called from in the reverse order (the first item is the deepest function).</p>
+
+<pre><code>foo()
+  bar()
+
+bar()
+  baz()
+
+baz()
+  return called-from
+
+foo()
+// =&gt; bar foo</code></pre>
+
+<h2>current-media()</h2>
+
+<p><code>current-media()</code> function returns the string of the current block&#39;s <code>@media</code> rule or <code>&#39;&#39;</code> if there is no <code>@media</code> above the block.</p>
+
+<pre><code>@media only screen and (min-width: 1024px)
+  current-media()
+// =&gt; &#39;@media (only screen and (min-width: (1024px)))&#39;</code></pre>
+
+<h2>+cache(keys...)</h2>
+
+<p><code>+cache</code> is a really powerful built-in function that allows you to create your own “cachable” mixins.</p>
+
+<p>“Cachable mixin” is the one, that would apply its contents to the given selector on the first call, but would <code>@extend</code> the first call&#39;s selector at the second call with the same params.</p>
+
+<pre><code>size($width, $height = $width)
+  +cache(&#39;w&#39; + $width)
+    width: $width
+  +cache(&#39;h&#39; + $height)
+    height: $height
+
+.a
+  size: 10px 20px
+.b
+  size: 10px 2em
+.c
+  size: 1px 2em</code></pre>
+
+<p>Would yield to</p>
+
+<pre><code>.a,
+.b {
+  width: 10px;
+}
+.a {
+  height: 20px;
+}
+.b,
+.c {
+  height: 2em;
+}
+.c {
+  width: 1px;
+}</code></pre>
+
+<p>See how the selectors are grouped together by the used property.</p>
+
+<h2>+prefix-classes(prefix)</h2>
+
+<p>Stylus comes with a block mixin <code>prefix-classes</code> that can be used for prefixing the classes inside any given Stylus&#39; block. For example:</p>
+
+<pre><code>+prefix-classes(&#39;foo-&#39;)
+  .bar
+    width: 10px</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>.foo-bar {
+  width: 10px;
+}</code></pre>
+
+<h2>lookup(name)</h2>
+
+<p>Allows to lookup a variable with a given name, passed as a string.
+Returns <code>null</code> if the variable is undefined.</p>
+
+<p>Useful when you need to get a value of a variable with dynamically
+generated name:</p>
+
+<pre><code>font-size-1 = 10px
+font-size-2 = 20px
+font-size-3 = 30px
+
+for i in 1..3
+  .text-{i}
+    font-size: lookup(&#39;font-size-&#39; + i)</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>.text-1 {
+  font-size: 10px;
+}
+.text-2 {
+  font-size: 20px;
+}
+.text-3 {
+  font-size: 30px;
+}</code></pre>
+
+<h2>define(name, expr[, global])</h2>
+
+<p>Allows to create or overwrite a variable with a given name, passed as a string, onto current scope (or global scope if <code>global</code> is true).</p>
+
+<p>This bif can be useful on those cases in which you&#39;d wish interpolation in variable names:</p>
+
+<pre><code>prefix = &#39;border&#39;
+border = { color: #000, length: 1px, style: solid }
+
+for prop, val in border
+  define(prefix + &#39;-&#39; + prop, val)
+
+body
+  border: border-length border-style border-color</code></pre>
+
+<p>yields:</p>
+
+<pre><code>body {
+  border: 1px solid #000;
+}</code></pre>
+
+<h2>operate(op, left, right)</h2>
+
+<p>  Perform the given <code>op</code> on the <code>left</code> and <code>right</code> operands:</p>
+
+<pre><code>  op = &#39;+&#39;
+  operate(op, 15, 5)
+  // =&gt; 20</code></pre>
+
+<h2>length([expr])</h2>
+
+<p>  Parenthesized expressions may act as tuples, the <code>length()</code> function returns the length of such expressions.</p>
+
+<pre><code>length((1 2 3 4))
+// =&gt; 4
+
+length((1 2))
+// =&gt; 2
+
+length((1))
+// =&gt; 1
+
+length(())
+// =&gt; 0
+
+length(1 2 3)
+// =&gt; 3
+
+length(1)
+// =&gt; 1
+
+length()
+// =&gt; 0</code></pre>
+
+<h2>selector()</h2>
+
+<p>Returns the compiled current selector or <code>&amp;</code> if called at root level.</p>
+
+<pre><code>.foo
+  selector()
+// =&gt; &#39;.foo&#39;
+
+.foo
+  &amp;:hover
+    selector()
+// &#39;.foo:hover&#39;</code></pre>
+
+<h2>selector-exists(selector)</h2>
+
+<p>Returns true if the given selector exists.</p>
+
+<pre><code>.foo
+  color red
+
+  a
+    font-size 12px
+
+selector-exists(&#39;.foo&#39;) // true
+selector-exists(&#39;.foo a&#39;) // true
+selector-exists(&#39;.foo li&#39;) // false
+selector-exists(&#39;.bar&#39;) // false</code></pre>
+
+<p>This method does not take into account the current context meaning:</p>
+
+<pre><code>.foo
+  color red
+
+  a
+    font-size 12px
+
+  selector-exists(&#39;a&#39;) // false
+  selector-exists(selector() + &#39; a&#39;) // true</code></pre>
+
+<h2>warn(msg)</h2>
+
+<p>  Warn with the given error <code>msg</code>, does not exit.</p>
+
+<pre><code>  warn(&quot;oh noes!&quot;)</code></pre>
+
+<h2>error(msg)</h2>
+
+<p>  Exits with the given error <code>msg</code>.</p>
+
+<pre><code>add(a, b)
+  unless a is a &#39;unit&#39; and b is a &#39;unit&#39;
+    error(&#39;add() expects units&#39;)
+  a + b</code></pre>
+
+<h2>last(expr)</h2>
+
+<p> Return the <em>last</em> value in the given <code>expr</code>:</p>
+
+<pre><code>  nums = 1 2 3
+  last(nums)
+  last(1 2 3)
+  // =&gt; 3
+
+  list = (one 1) (two 2) (three 3)
+  last(list)
+  // =&gt; (three 3)</code></pre>
+
+<h2>p(expr)</h2>
+
+<p> Inspect the given <code>expr</code>:</p>
+
+<pre><code> fonts = Arial, sans-serif
+ p(&#39;test&#39;)
+ p(123)
+ p((1 2 3))
+ p(fonts)
+ p(#fff)
+ p(rgba(0,0,0,0.2))
+
+ add(a, b)
+   a + b
+
+ p(add)</code></pre>
+
+<p>stdout:</p>
+
+<pre><code> inspect: &quot;test&quot;
+ inspect: 123
+ inspect: 1 2 3
+ inspect: Arial, sans-serif
+ inspect: #fff
+ inspect: rgba(0,0,0,0.2)
+ inspect: add(a, b)</code></pre>
+
+<h2>opposite-position(positions)</h2>
+
+<p> Return the opposites of the given <code>positions</code>.</p>
+
+<pre><code> opposite-position(right)
+ // =&gt; left
+
+ opposite-position(top left)
+ // =&gt; bottom right
+
+ opposite-position(&#39;top&#39; &#39;left&#39;)
+ // =&gt; bottom right</code></pre>
+
+<h2>image-size(path)</h2>
+
+<p>  Returns the <code>width</code> and <code>height</code> of the image found at <code>path</code>. Lookups are performed in the same manner as <code>@import</code>, altered by the <code>paths</code> setting.</p>
+
+<pre><code>  width(img)
+    return image-size(img)[0]
+
+  height(img)
+    return image-size(img)[1]
+
+  image-size(&#39;tux.png&#39;)
+  // =&gt; 405px 250px
+
+  image-size(&#39;tux.png&#39;)[0] == width(&#39;tux.png&#39;)
+  // =&gt; true</code></pre>
+
+<h2>embedurl(path[, encoding])</h2>
+
+<p>Returns an inline image as a <code>url()</code> literal, encoded with <code>encoding</code> (available encodings: <code>base64</code> (default), and <code>utf8</code>).</p>
+
+<pre><code>background: embedurl(&#39;logo.png&#39;)
+// =&gt; background: url(&quot;data:image/png;base64,…&quot;)
+
+background: embedurl(&#39;logo.svg&#39;, &#39;utf8&#39;)
+// =&gt; background: url(&quot;data:image/svg+xml;charset=utf-8,…&quot;)</code></pre>
+
+<h2>add-property(name, expr)</h2>
+
+<p>  Adds property <code>name</code>, with the given <code>expr</code> to the closest block.</p>
+
+<p>  For example:</p>
+
+<pre><code>  something()
+    add-property(&#39;bar&#39;, 1 2 3)
+    s(&#39;bar&#39;)
+
+  body
+    foo: something()</code></pre>
+
+<p>yields:</p>
+
+<pre><code>  body {
+    bar: 1 2 3;
+    foo: bar;
+  }</code></pre>
+
+<p>  Next the &quot;magic&quot; <code>current-property</code> local variable comes into play. This variable is automatically available to function bodies, and contains an expression with the current property&#39;s name, and value.</p>
+
+<p>  For example if we were to inspect this local variable using <code>p()</code>, we
+  get the following:</p>
+
+<pre><code>    p(current-property)
+    // =&gt; &quot;foo&quot; (foo __CALL__ bar baz)
+
+    p(current-property[0])
+    // =&gt; &quot;foo&quot;
+
+    p(current-property[1])
+    // =&gt; foo __CALL__ bar baz</code></pre>
+
+<p>  Using <code>current-property</code> we can take our example a bit further, and duplicate the property with new values, and a conditional to ensure the function is only used within a property value.</p>
+
+<pre><code>    something(n)
+      if current-property
+        add-property(current-property[0], s(&#39;-webkit-something(%s)&#39;, n))
+        add-property(current-property[0], s(&#39;-moz-something(%s)&#39;, n))
+        s(&#39;something(%s)&#39;, n)
+      else
+        error(&#39;something() must be used within a property&#39;)
+
+    body {
+      foo: something(15px) bar;
+    }</code></pre>
+
+<p>yields:</p>
+
+<pre><code>    body {
+      foo: -webkit-something(15px);
+      foo: -moz-something(15px);
+      foo: something(15px) bar;
+    }</code></pre>
+
+<p>  If you noticed in the example above, <code>bar</code> is only present for the initial call, since we returned <code>something(15px)</code>, it remained in-place within the expression, however the others do not take the rest of the expression into account.</p>
+
+<p>  Our more robust solution below, defines a function named <code>replace()</code> which clones the expression to prevent mutation, replaces the string value of an expression with another, and returns the cloned expression. We then move on to replace <code>__CALL__</code> within the expressions, which represents the cyclic call to <code>something()</code>.</p>
+
+<pre><code>    replace(expr, str, val)
+      expr = clone(expr)
+      for e, i in expr
+        if str == e
+          expr[i] = val
+      expr
+
+    something(n)
+      if current-property
+        val = current-property[1]
+        webkit = replace(val, &#39;__CALL__&#39;, s(&#39;-webkit-something(%s)&#39;, n))
+        moz = replace(val, &#39;__CALL__&#39;, s(&#39;-moz-something(%s)&#39;, n))
+        add-property(current-property[0], webkit)
+        add-property(current-property[0], moz)
+        s(&#39;something(%s)&#39;, n)
+      else
+        error(&#39;something() must be used within a property&#39;)
+
+    body
+      foo: something(5px) bar baz</code></pre>
+
+<p>yields:</p>
+
+<pre><code>      body {
+        foo: -webkit-something(5px) bar baz;
+        foo: -moz-something(5px) bar baz;
+        foo: something(5px) bar baz;
+      }</code></pre>
+
+<p>Our implementation is now fully transparent both in regards to the property it is called within, and the position of the call. This powerful concept aids in transparent vendor support for function calls, such as gradients.</p>
+
+<h2>json(path[, options])</h2>
+
+<p>Convert a .json file into stylus variables or an object. Nested variable object keys are joined with a dash (-).</p>
+
+<p>For example, the following sample media-queries.json file:</p>
+
+<pre><code>{
+    &quot;small&quot;: &quot;screen and (max-width:400px)&quot;,
+    &quot;tablet&quot;: {
+        &quot;landscape&quot;: &quot;screen and (min-width:600px) and (orientation:landscape)&quot;,
+        &quot;portrait&quot;: &quot;screen and (min-width:600px) and (orientation:portrait)&quot;
+    }
+}</code></pre>
+
+<p>May be used in the following ways:</p>
+
+<pre><code>json(&#39;media-queries.json&#39;)
+
+@media small
+// =&gt; @media screen and (max-width:400px)
+
+@media tablet-landscape
+// =&gt; @media screen and (min-width:600px) and (orientation:landscape)
+
+vars = json(&#39;vars.json&#39;, { hash: true })
+body
+  width: vars.width
+
+vars = json(&#39;vars.json&#39;, { hash: true, leave-strings: true })
+typeof(vars.icon)
+// =&gt; &#39;string&#39;
+
+// don&#39;t throw an error if the JSON file doesn&#39;t exist
+optional = json(&#39;optional.json&#39;, { hash: true, optional: true })
+typeof(optional)
+// =&gt; &#39;null&#39;</code></pre>
+
+<h2>use(path)</h2>
+
+<p>You can use any given js-plugin at given <code>path</code> with <code>use()</code> function right inside your &#39;.styl&#39; files, like this:</p>
+
+<pre><code>use(&quot;plugins/add.js&quot;)
+
+width add(10, 100)
+// =&gt; width: 110</code></pre>
+
+<p>And the <code>add.js</code> plugin in this case looks this way:</p>
+
+<pre><code>var plugin = function(){
+  return function(style){
+    style.define(&#39;add&#39;, function(a, b) {
+      return a.operate(&#39;+&#39;, b);
+    });
+  };
+};
+module.exports = plugin;</code></pre>
+
+<p>If you&#39;d like to return any Stylus objects like <code>RGBA</code>, <code>Ident</code> or <code>Unit</code>, you could use the provided Stylus nodes like this:</p>
+
+<pre><code>var plugin = function(){
+  return function(style){
+    var nodes = this.nodes;
+    style.define(&#39;something&#39;, function() {
+      return new nodes.Ident(&#39;foobar&#39;);
+    });
+  };
+};
+module.exports = plugin;</code></pre>
+
+<p>You can pass any options as an optional second argument, using the <a href="hashes.html">hash object</a>:</p>
+
+<pre><code>use(&quot;plugins/add.js&quot;, { foo: bar })</code></pre>
+
+<h2>Undefined Functions</h2>
+
+<p>  Undefined functions will output as literals, so for example
+  we may call <code>rgba-stop(50%, #fff)</code> within our css, and it will
+  output as you would expect. We can use this within helpers as well.</p>
+
+<p>  In the example below we simply define the function <code>stop()</code> which
+  returns the literal <code>rgba-stop()</code> call.</p>
+
+<pre><code>stop(pos, rgba)
+  rgba-stop(pos, rgba)
+
+stop(50%, orange)
+// =&gt; rgba-stop(50%, #ffa500)</code></pre></div></body></html>

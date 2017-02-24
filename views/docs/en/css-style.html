@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>css-style-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>CSS Style Syntax</h1>
+
+<p> Stylus transparently supports a regular CSS-style syntax. This means you don&#39;t need an alternative parser, or specify that a certain file uses a specific style.</p>
+
+<h2>Example</h2>
+
+<p> Below is a small style using the indented approach:</p>
+
+<pre><code> border-radius()
+   -webkit-border-radius arguments
+   -moz-border-radius arguments
+   border-radius arguments
+
+ body a
+   font 12px/1.4 &quot;Lucida Grande&quot;, Arial, sans-serif
+   background black
+   color #ccc
+
+ form input
+   padding 5px
+   border 1px solid
+   border-radius 5px</code></pre>
+
+<p> Since braces, colons, and semi-colons are optional, we could write this example just as we would with normal CSS:</p>
+
+<pre><code> border-radius() {
+   -webkit-border-radius: arguments;
+   -moz-border-radius: arguments;
+   border-radius: arguments;
+ }
+
+ body a {
+   font: 12px/1.4 &quot;Lucida Grande&quot;, Arial, sans-serif;
+   background: black;
+   color: #ccc;
+ }
+
+ form input {
+   padding: 5px;
+   border: 1px solid;
+   border-radius: 5px;
+ }</code></pre>
+
+<p>While Stylus don&#39;t support <em>every</em> possible CSS-like syntax, if can understand even such code:</p>
+
+<pre><code>    border-radius() {
+      -webkit-border-radius: arguments;
+      -moz-border-radius: arguments;
+      border-radius: arguments;
+    }
+
+body a
+{
+  font: 12px/1.4 &quot;Lucida Grande&quot;, Arial, sans-serif;
+    background: black;
+  color: #ccc;
+}
+
+    form input {
+      padding: 5px;
+  border: 1px solid;
+      border-radius: 5px;
+      }</code></pre>
+
+<p> Since we may mix and match the two variants, the following is valid as well:</p>
+
+<pre><code> border-radius()
+   -webkit-border-radius: arguments;
+   -moz-border-radius: arguments;
+   border-radius: arguments;
+
+ body a {
+   font: 12px/1.4 &quot;Lucida Grande&quot;, Arial, sans-serif;
+   background: black;
+   color: #ccc;
+ }
+
+ form input
+   padding: 5px;
+   border: 1px solid;
+   border-radius: 5px;</code></pre>
+
+<p> Variables, functions, mixins, and all the other features provided by Stylus still work as expected:</p>
+
+<pre><code> main-color = white
+ main-hover-color = black
+
+ body a {
+   color: main-color;
+   &amp;:hover { color: main-hover-color; }
+ }
+
+ body a { color: main-color; &amp;:hover { color: main-hover-color; }}</code></pre>
+
+<p> There are a few caveats to this rule: since the two styles may be mixed and matched, some indentation rules still apply. So although not <em>every</em> plain-CSS stylesheet will work with zero modification, this feature allows those who prefer CSS syntax to continue doing so while leveraging Stylus&#39; other powerful features.</p></div></body></html>

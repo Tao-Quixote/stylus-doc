@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>conditionals-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Conditionals</h1>
+
+<p> Conditionals provide control flow to a language which is otherwise static, providing conditional imports, mixins, functions, and more. The examples below are simply examples, and not recommended :)</p>
+
+<h2>if / else if / else</h2>
+
+<p> The <code>if</code> conditional works as you would expect, simply accepting an expression, evaluating the following block when <code>true</code>. Along with <code>if</code> are the typical <code>else if</code> and <code>else</code> tokens, acting as fallbacks.</p>
+
+<p> The example below would conditionally overload the <code>padding</code> property, swapping it for <code>margin</code>.</p>
+
+<pre><code>overload-padding = true
+
+if overload-padding
+  padding(y, x)
+    margin y x
+
+body
+  padding 5px 10px</code></pre>
+
+<p>Another example:</p>
+
+<pre><code>box(x, y, margin = false)
+  padding y x
+  if margin
+    margin y x
+
+body
+  box(5px, 10px, true)</code></pre>
+
+<p>Another <code>box()</code> helper:</p>
+
+<pre><code>box(x, y, margin-only = false)
+  if margin-only
+    margin y x
+  else
+    padding y x</code></pre>
+
+<h2>unless</h2>
+
+<p> For users familiar with the Ruby programming language, we have the <code>unless</code> conditional. It’s basically the opposite of <code>if</code>—essentially <code>if (!(expr))</code>.</p>
+
+<p>In the example below, if <code>disable-padding-override</code> is <code>undefined</code> or <code>false</code>, <code>padding</code> will be overridden, displaying <code>margin</code> instead. But if it’s <code>true</code>, <code>padding</code> will continue outputting <code>padding 5px 10px</code> as expected.</p>
+
+<pre><code> disable-padding-override = true
+
+ unless disable-padding-override is defined and disable-padding-override
+   padding(x, y)
+     margin y x
+
+ body
+   padding 5px 10px</code></pre>
+
+<h2>Postfix Conditionals</h2>
+
+<p>  Stylus supports postfix conditionals. This means that <code>if</code> and <code>unless</code> act as operators; they evaluate the left-hand operand when the right-hand expression is truthy.</p>
+
+<p>  For example let&#39;s define <code>negative()</code> to perform some basic type checking. Below we use block-style conditionals:</p>
+
+<pre><code>  negative(n)
+    unless n is a &#39;unit&#39;
+      error(&#39;invalid number&#39;)
+    if n &lt; 0
+      yes
+    else
+      no</code></pre>
+
+<p>  Next, we utilize postfix conditionals to keep our function terse.</p>
+
+<pre><code>  negative(n)
+    error(&#39;invalid number&#39;) unless n is a &#39;unit&#39;
+    return yes if n &lt; 0
+    no</code></pre>
+
+<p>  Of course, we could take this further.  For example, we could write <code>n &lt; 0 ? yes : no</code>, or simply stick with booleans: <code>n &lt; 0</code>.</p>
+
+<p>  Postfix conditionals may be applied to most single-line statements. For example, <code>@import</code>, <code>@charset</code>, mixins—and of course, properties as shown below:</p>
+
+<pre><code>  pad(types = margin padding, n = 5px)
+    padding unit(n, px) if padding in types
+    margin unit(n, px) if margin in types
+
+  body
+    pad()
+
+  body
+    pad(margin)
+
+  body
+    apply-mixins = true
+    pad(padding, 10) if apply-mixins</code></pre>
+
+<p>yielding:</p>
+
+<pre><code>  body {
+    padding: 5px;
+    margin: 5px;
+  }
+  body {
+    margin: 5px;
+  }
+  body {
+    padding: 10px;
+  }</code></pre></div></body></html>

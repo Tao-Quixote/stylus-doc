@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>error-reporting-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Error Reporting</h1>
+
+<p> Stylus has fantastic error reporting built-in for syntax, parse, and evaluation errors—complete with stack traces, line numbers, and filenames.</p>
+
+<h2>Parse Error</h2>
+
+<p>Parse error example:</p>
+
+<pre><code> body
+   form input
+     == padding 5px</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>  ParseError: test.styl:3:16
+    1| body
+    2|    form input
+    3|      == padding 5px
+ ---------------------^
+    4|
+
+  illegal unary &quot;==&quot;, missing left-hand operand</code></pre>
+
+<h2>Evaluation Error</h2>
+
+<p> This &quot;runtime&quot; or evaluation error is caused by passing a string to <code>border-radius()</code>, instead of the expected <code>Unit</code> (by using our helper <code>ensure(n, &#39;unit&#39;)</code>).</p>
+
+<pre><code>  ensure(val, type)
+    unless val is a type
+      error(&#39;expected a &#39; + type + &#39;, but got &#39; + typeof(val))
+
+  border-radius(n)
+    ensure(n, &#39;unit&#39;)
+    -webkit-border-radius n
+    -moz-border-radius n
+    border-radius n
+
+  body
+    border-radius &#39;5px&#39;</code></pre>
+
+<p>Yielding:</p>
+
+<pre><code>  Error: test.styl:3:62
+    1| ensure(val, type)
+    2|     unless val is a type
+    3|       error(&#39;expected a &#39; + type + &#39;, but got &#39; + typeof(val))
+ -------------------------------------------------------------------^
+    4|
+    5| border-radius(n)
+    6|   ensure(n, &#39;unit&#39;)
+
+  expected a unit, but got string
+      at ensure() (test.styl:2:17)
+      at border-radius() (test.styl:6:16)
+      at &quot;body&quot; (test.styl:10:18)</code></pre></div></body></html>

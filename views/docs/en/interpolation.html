@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>interpolation-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Interpolation</h1>
+
+<p>Stylus supports interpolation by using the <code>{}</code> characters to surround an expression, which then becomes part of the identifier. For example, <code>-webkit-{&#39;border&#39; + &#39;-radius&#39;}</code> evaluates to <code>-webkit-border-radius</code>.</p>
+
+<p>A great example use-case for this is expanding properties with vendor prefixes.</p>
+
+<pre><code>  vendor(prop, args)
+    -webkit-{prop} args
+    -moz-{prop} args
+    {prop} args
+
+  border-radius()
+    vendor(&#39;border-radius&#39;, arguments)
+
+  box-shadow()
+    vendor(&#39;box-shadow&#39;, arguments)
+
+  button
+    border-radius 1px 2px / 3px 4px</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>  button {
+    -webkit-border-radius: 1px 2px / 3px 4px;
+    -moz-border-radius: 1px 2px / 3px 4px;
+    border-radius: 1px 2px / 3px 4px;
+  }</code></pre>
+
+<h2>Selector Interpolation</h2>
+
+<p>Interpolation works with selectors as well. For example, we may iterate to assign the <code>height</code> property for the first 5 rows in a table, as shown below:</p>
+
+<pre><code>table
+  for row in 1 2 3 4 5
+    tr:nth-child({row})
+      height: 10px * row</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>table tr:nth-child(1) {
+  height: 10px;
+}
+table tr:nth-child(2) {
+  height: 20px;
+}
+table tr:nth-child(3) {
+  height: 30px;
+}
+table tr:nth-child(4) {
+  height: 40px;
+}
+table tr:nth-child(5) {
+  height: 50px;
+}</code></pre>
+
+<p>You may also put together multiple selectors into one variable by building a string and interpolate them in place:</p>
+
+<pre><code>mySelectors = &#39;#foo,#bar,.baz&#39;
+
+{mySelectors}
+  background: #000</code></pre>
+
+<p>Yields:</p>
+
+<pre><code>#foo,
+#bar,
+.baz {
+  background: #000;
+}</code></pre></div></body></html>

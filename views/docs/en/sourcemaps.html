@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>sourcemaps-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Sourcemaps</h1>
+
+<p>  Stylus supports basic sourcemaps according to the <a href="https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k">Sourcemap v3 spec</a></p>
+
+<h2>Create a sourcemap</h2>
+
+<p>  Pass the <code>--sourcemap</code> flag (or <code>-m</code>) with a Stylus file. This will create a <code>style.css</code> file, and a <code>style.css.map</code> file as siblings to your <code>style.styl</code> and place a sourcemap link at the bottom of <code>style.css</code> to your sourcemap.</p>
+
+<p>  <code>stylus -m style.styl</code></p>
+
+<p>  You can also run this command while watching a file. For instance: <code>stylus -w -m style.styl</code>. This will update your sourcemap everytime you save.</p>
+
+<h2>JavaScript API</h2>
+
+<p>  Set the <code>sourcemap</code> setting with an options object or a boolean value:</p>
+
+<pre><code>var stylus = require(&#39;stylus&#39;);
+
+var style = stylus(str)
+  .set(&#39;filename&#39;, &#39;file.styl&#39;)
+  .set(&#39;sourcemap&#39;, options);
+
+style.render(function(err, css) {
+  // generated sourcemap object
+  console.log(style.sourcemap);
+});</code></pre>
+
+<h3>Options</h3>
+
+<pre><code>`comment`     Adds a comment with the `sourceMappingURL` to the generated CSS (default: `true`)
+`inline`      Inlines the sourcemap with full source text in base64 format (default: `false`)
+`sourceRoot`  &quot;sourceRoot&quot; property of the generated sourcemap
+`basePath`    Base path from which sourcemap and all sources are relative (default: `.`)</code></pre></div></body></html>

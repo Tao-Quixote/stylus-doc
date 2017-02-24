@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>firebug-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>FireStylus extension for Firebug</h1>
+
+<p><a href="//github.com/parallel/firestylus">FireStylus</a> is a Firebug extension 
+that makes Firebug display the Stylus filename and line numbers of 
+the Stylus-generated CSS styles rather than those of the generated CSS.</p>
+
+<p><img alt="Screenshot" src="//raw.github.com/parallel/firestylus/master/src/chrome/skin/screenshot.png"/></p>
+
+<h2>Usage</h2>
+
+<p>First, you need to install <a href="https://addons.mozilla.org/firefox/downloads/latest/1843/addon-1843-latest.xpi?src=addondetail">Firebug</a>
+and the <a href="//github.com/parallel/firestylus">FireStylus extension</a></p>
+
+<p>Then simply enable the Stylus&#39;s <code>firebug</code> option when generating CSS.</p>
+
+<p>Command line usage:</p>
+
+<pre><code>$ stylus -f &lt;path&gt;
+$ stylus --firebug &lt;path&gt;</code></pre>
+
+<p>Javascript usage:</p>
+
+<pre><code>var stylus = require(&#39;stylus&#39;);
+
+stylus(str)
+  .set(&#39;firebug&#39;, true)
+  .render(function(err, css){
+	// logic
+  });</code></pre>
+
+<p>Connect / Express:</p>
+
+<pre><code>var stylus = require(&#39;stylus&#39;);
+
+var server = connect.createServer(
+    stylus.middleware({
+        src: __dirname
+      , dest: __dirname + &#39;/public&#39;
+      , firebug: true
+    })
+  , connect.static(__dirname + &#39;/public&#39;)
+);</code></pre>
+
+<h2>Compatibility</h2>
+
+<p> FireStylus should work with Firefox versions 3.0 and up, and with Firebug versions 1.4 and up.</p>
+
+<ul><li>Firefox 3+ (also works with version 5)</li><li>Firebug 1.4+</li></ul>
+
+<h2>Limitations</h2>
+
+<p>FireStylus and FireSass are incompatible. You cannot enable them
+simultaneously.</p>
+
+<p>FireStylus (like FireSass) only works in the HTML pane of Firebug. The others
+(such as the CSS pane) won&#39;t work due to Firebug limitations.</p></div></body></html>

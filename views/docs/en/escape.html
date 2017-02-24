@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>escape-stylus's doc</title><link href="/assets/styles/normalize.css" rel="stylesheet" type="text/css"><link href="/assets/styles/reset.css" rel="stylesheet" type="text/css"><link href="/assets/styles/style.css" rel="stylesheet" type="text/css"></head><body><div id="container"><hr/>
+
+<hr/>
+
+<h1>Char Escaping</h1>
+
+<p> Stylus lets you escape characters. This effectively turns them into identifiers, allowing them to be rendered as literals. </p>
+
+<p> For example:</p>
+
+<pre><code> body
+   padding 1 \+ 2</code></pre>
+
+<p>Compiles to:</p>
+
+<pre><code> body {
+   padding: 1 + 2;
+ }</code></pre>
+
+<p>Note that Stylus requires that <code>/</code> is parenthesized when used in a property:</p>
+
+<pre><code>body
+  font 14px/1.4
+  font (14px/1.4)</code></pre>
+
+<p>yields:</p>
+
+<pre><code>body {
+  font: 14px/1.4;
+  font: 10px;
+}</code></pre></div></body></html>
