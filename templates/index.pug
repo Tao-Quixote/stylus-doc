@@ -3,8 +3,17 @@ html
   head
     meta(charset='utf-8')
     title #{title}-stylus's doc
-    link(href="/assets/styles/normalize.css" rel="stylesheet" type="text/css")
-    link(href="/assets/styles/reset.css" rel="stylesheet" type="text/css")
-    link(href="/assets/styles/style.css" rel="stylesheet" type="text/css")
+    include includes/meta.pug
+    include includes/styles.pug
   body
-    div#container !{content}
+    div.wrap
+      aside.sidebar
+        nav
+          include includes/navigator
+      div.content
+        header.logo
+          a
+            img(src="/assets/images/stylus-logo.svg" alt="stylus")
+        div.docs !{content}
+        a.meow(href="https://github.com/Tao-Quixote/stylus-doc")
+          img(src="/assets/images/octocat.svg" alt="Stylus doc on Github")

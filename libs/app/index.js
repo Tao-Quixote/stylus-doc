@@ -47,7 +47,7 @@ function addRoutes(app) {
   app.all('/*', function(req, res, next) {
     let path = req.path;
     if ('/' === path) {
-      res.send("Homepage")
+      res.render('zh/inde.html')
     } else if (path.match(/^\/en\/\w+\.html$/)) {
       handleEn(path, res, next)
     } else if (path.match(/^\/zh\/\w+\.html$/)) {

@@ -5,6 +5,8 @@
 const fs = require('fs')
 
 const pugmd2html = require('./libs/pugmd2html')
+const mkdir = require('./libs/mkdir')
+
 
 
 function md2html(dirs) {
@@ -20,6 +22,7 @@ function md2html(dirs) {
           } else if (dir.match(/\/zh\//i)){
             destPath = './views/docs/zh/'
           }
+          mkdir(destPath)
           data.forEach(file => {
             let filename = file.split('.')[0];
             pugmd2html.transform(dir, destPath, filename)
