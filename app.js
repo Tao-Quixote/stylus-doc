@@ -4,7 +4,6 @@
  */
 const express = require('express')
 const App = require('./libs/app')
-const markdown = require('markdown').markdown
 
 const app = express()
 
