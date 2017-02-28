@@ -20,12 +20,10 @@ exports = module.exports = {
     fs.access(srcFile, fs.constants.R_OK, err => {
       if (err) {
         console.log('err:' + err)
-        next()
       } else {
         fs.readFile(srcFile, 'utf8', (err, data) => {
           if (err) {
             console.log('err:' + err)
-            next()
           } else {
             let content = markdown.toHTML(decoder.write(data))
             const compileFunction = pug.compileFile('./templates/index.pug')
@@ -34,7 +32,7 @@ exports = module.exports = {
               content: content
             })
             fs.writeFile(destFile, html, err => {
-              if (err) throw err;
+              if (err) throw err
               console.log('file ' + filename + ' is written at ' + destPath)
             })
           }
