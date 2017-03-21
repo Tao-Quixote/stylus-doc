@@ -35,6 +35,14 @@ node文件依赖库文件。
 
 ```.html```文件存放目录。
 
+### app.js
+
+项目的入口文件。
+
+### transform.js
+
+```.md```文件转换为```.html```文件的工具文件。
+
 ## 注意事项
 
 **注：该项目中的```doc```目录中的```en```文件夹下的文件来自[Stylus官方git项目](https://github.com/stylus/stylus/)。**

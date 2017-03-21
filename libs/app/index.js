@@ -1,5 +1,5 @@
-var express = require('../../node_modules/express')
-var ejs = require('../../node_modules/ejs')
+var express = require('express')
+var ejs = require('ejs')
 var fs = require('fs')
 
 exports = module.exports = {
@@ -47,7 +47,7 @@ function addRoutes (app) {
   app.all('/*', function (req, res, next) {
     let path = req.path
     if (path === '/') {
-      res.render('zh/inde.html')
+      res.render('zh/index.html')
     } else if (path.match(/^\/en\/\w+\.html$/)) {
       handleEn(path, res, next)
     } else if (path.match(/^\/zh\/\w+\.html$/)) {
@@ -57,7 +57,7 @@ function addRoutes (app) {
   // Page 404
   app.use(function (req, res) {
     res.status(404)
-    res.render('errors/404.html', {
+    res.render('../errors/404.html', {
       title: 'Not Found'
     })
   })
@@ -67,7 +67,7 @@ function addRoutes (app) {
       console.log(err)
     }
     res.status(500)
-    res.render('errors/500.html', {
+    res.render('../errors/500.html', {
       title: 'Internal Server Error'
     })
   })
