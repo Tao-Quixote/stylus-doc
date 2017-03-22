@@ -1,6 +1,6 @@
-# EXPRESSIVE, DYNAMIC, ROBUST CSS
+# 富于表现力的, 动态的, 健壮的CSS
 
-## CSS needs a hero
+## CSS需要一个超级英雄
 
     body {
       font: 12px Helvetica, Arial, sans-serif;
@@ -11,7 +11,7 @@
       border-radius: 5px;
     }
 
-### What if we could omit braces?
+### 可省略的花括号
 
     body
       font: 12px Helvetica, Arial, sans-serif;
@@ -21,7 +21,7 @@
       -moz-border-radius: 5px;
       border-radius: 5px;
 
-### How about semi-colons?
+### 可省略掉分号
 
     body
       font: 12px Helvetica, Arial, sans-serif
@@ -31,7 +31,7 @@
       -moz-border-radius: 5px
       border-radius: 5px
   
-### Keep things DRY
+### 保持整洁
 
     border-radius()
       -webkit-border-radius: arguments
@@ -44,7 +44,7 @@
     a.button
       border-radius(5px)
 
-### How about transparent mixins?
+### 透明的mixins(可像原生css一样调用混入)
 
     border-radius()
       -webkit-border-radius: arguments
@@ -57,7 +57,7 @@
     a.button
       border-radius: 5px
 
-### Create & Share
+### 创造 & 分享
 
     @import 'vendor'
 
@@ -67,7 +67,7 @@
     a.button
       border-radius: 5px
 
-### Even in-language functions!
+### 甚至有编程语言中的函数
 
     sum(nums...)
       sum = 0
@@ -76,7 +76,7 @@
     sum(1 2 3 4)
     // => 10
 
-### What if it were all optional?
+### 如果所有项都是可选的
 
     fonts = helvetica, arial, sans-serif
 
@@ -85,12 +85,15 @@
       font: 14px/1.4 fonts;
     }
 
-### Get styling with Stylus
-Installing Stylus is very easy once you have Node.js. So get the binaries for your platform and make sure that they also include npm, Node’s package manager.
+### 使用Stylus书写样式
 
-Now, type in your terminal:
+在有Node.js的情况下安装Stylus是一件非常简单的事情。下载安装适合你操作系统的安装包，并确保安装包包含Node的包管理工具--```npm```
 
-    $ npm install stylus -g
+在终端中输入：
 
-If you want an expressive css language for nodejs with these features or the features listed below, head over to  [GitHub](http://github.com/stylus/stylus) for more information.
+```javascript
+$ npm install stylus -g
+```
+
+如果想使用上面这种基于Node.js，特性丰富且富于表现力的css“语言”，前往[GitHub](http://github.com/stylus/stylus)获取更多信息。
 

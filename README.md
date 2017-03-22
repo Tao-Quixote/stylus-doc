@@ -5,6 +5,7 @@ Stylus中文版文档。翻译源文档(.md文件)来自[Stylus官方git项目](
 ## Translated List
 
 * index.md
+* selectors.md
 
 ## 目录介绍
 
