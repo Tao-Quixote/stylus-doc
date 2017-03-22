@@ -2,8 +2,6 @@
 
 ## 缩进
 
-Stylus is "pythonic" (i.e. indentation-based). Whitespace is significant, so we substitute `{` and `}` with an _indent_, and an _outdent_ as shown below:
-
 Stylus是“python式的”（PS：基于缩进）。空格是很重要的，所以我们使用_缩进_和_突出_来代替`{` 和 `}`，如下所示：
 
 ```stylus
@@ -69,59 +67,68 @@ form input,
   border 1px solid
 ```
 
-## Parent Reference
+## 父级引用
+ 
+符号`&`表示父级选择器的引用。下面的例子中，`textarea`和`input`两个选择器的伪类`:hover`都会改变颜色。
 
-The `&` character references the parent selector(s). In the example below our two selectors (`textarea` and `input`) both alter the `color` on the `:hover` pseudo selector. 
+```stylus
+textarea
+input
+  color #A7A7A7
+  &:hover
+    color #000
+```
+编译后:
 
-    textarea
-    input
-      color #A7A7A7
-      &:hover
-        color #000
+```css
+textarea,
+input {
+  color: #a7a7a7;
+}
+textarea:hover,
+input:hover {
+  color: #000;
+}
+```
 
-Compiles to:
+下面的例子中，在`混入(mixin)`中使用父级引用为IE浏览器中的元素加了一个简单的`2px`的边框。
 
-    textarea,
-    input {
-      color: #a7a7a7;
-    }
-    textarea:hover,
-    input:hover {
-      color: #000;
-    }
+```stylus
+box-shadow()
+  -webkit-box-shadow arguments
+  -moz-box-shadow arguments
+  box-shadow arguments
+  html.ie8 &,
+  html.ie7 &,
+  html.ie6 &
+    border 2px solid arguments[length(arguments) - 1]
 
-Below is an example providing a simple `2px` border for Internet Explorer utilizing the parent reference within a mixin:
+body
+  #login
+    box-shadow 1px 1px 3px #eee
+```
 
-      box-shadow()
-        -webkit-box-shadow arguments
-        -moz-box-shadow arguments
-        box-shadow arguments
-        html.ie8 &,
-        html.ie7 &,
-        html.ie6 &
-          border 2px solid arguments[length(arguments) - 1]
+编译后:
 
-      body
-        #login
-          box-shadow 1px 1px 3px #eee
+```css
+body #login {
+  -webkit-box-shadow: 1px 1px 3px #eee;
+  -moz-box-shadow: 1px 1px 3px #eee;
+  box-shadow: 1px 1px 3px #eee;
+}
+html.ie8 body #login,
+html.ie7 body #login,
+html.ie6 body #login {
+  border: 2px solid #eee;
+}
+```
 
-Yielding:
+如果需要在选择器中单纯地使用`&`符，可以通过转义符`\`来转义，不适用Stylus中父级引用的功能。
 
-      body #login {
-        -webkit-box-shadow: 1px 1px 3px #eee;
-        -moz-box-shadow: 1px 1px 3px #eee;
-        box-shadow: 1px 1px 3px #eee;
-      }
-      html.ie8 body #login,
-      html.ie7 body #login,
-      html.ie6 body #login {
-        border: 2px solid #eee;
-      }
-
-If you'd need to use the ampersand symbol in a selector without it behaving like a parent reference, you can just escape it:
-
-    .foo[title*='\&']
-    // => .foo[title*='&']
+```stylus
+.foo[title*='\&']
+// => .foo[title*='&']
+```
 
 ## Partial Reference
 
