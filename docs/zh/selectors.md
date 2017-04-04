@@ -132,95 +132,110 @@ html.ie6 body #login {
 
 ## Partial Reference
 
-`^[N]` anywhere in a selector, where `N` can be a number, represents a partial reference.
+`^[N]`可以出现在选择器中的任何地方，`N`是一个数字，代表一个部分引用。
 
-Partial reference works similar to the parent reference, but while parent reference contains the whole selector, partial selectors contain only the first merged `N` levels of the nested selectors, so you could access those nesting levels individually.
+部分引用的工作机制和父级引用类似，区别是父级引用包括整个选择器，而部分选择器只包括嵌套选择器中的第一个合并的第`N`层级，因此可以分别获取到嵌套的层级。
 
-The `^[0]` would give you the selector from the first level, the `^[1]` would give you the rendered selector from the second level and so on:
+`^[0]`表示选择第一层选择器，`^[1]`表示第二层选择器，以此类推：
 
-    .foo
-      &__bar
-        width: 10px
+```stylus
+.foo
+  &__bar
+    width: 10px
+    
+    ^[0]:hover &
+      width: 20px
+```
 
-        ^[0]:hover &
-          width: 20px
+结果：
 
-would be rendered as
+```css
+.foo__bar {
+  width: 10px;
+}
+.foo:hover .foo__bar {
+  width: 20px;
+}
+```
 
-    .foo__bar {
-      width: 10px;
-    }
-    .foo:hover .foo__bar {
-      width: 20px;
-    }
+如果是负数则会从最后开始计数，所以`^[-1]`代表`&`链前的最后一个选择器，即`&__bar`选择器：
 
-Negative values are counting from the end, so ^[-1] would give you the last selector from the chain before `&`:
+```stylus
+.foo
+  &__bar
+    .baz
+      width: 10px
 
-    .foo
-      &__bar
-        &_baz
-          width: 10px
+      ^[-1]:hover &
+        width: 20px
+```
 
-          ^[-1]:hover &
-            width: 20px
+结果：
 
-would be rendered as
+```css
+.foo__bar_baz {
+  width: 10px;
+}
+.foo__bar:hover .foo__bar .baz {
+  width: 20px;
+}
+```
 
-    .foo__bar_baz {
-      width: 10px;
-    }
-    .foo__bar:hover .foo__bar_baz {
-      width: 20px;
-    }
-
-Negative values are especially helpful for usage inside mixins when you don't know at what nesting level you're calling it.
+当在mixins中使用部分引用但是不知道嵌套层级的时候，负数就显得特别有用。
 
 * * *
 
-Note that partial reference contain the whole rendered chain of selectors until the given nesting level, not the “part” of the selector.
+注意，部分引用包括直到给定嵌套层级(`^[N]`指定的层级)的整个选择器链，而不是部分选择器。`^[N]`最后的`&`代表部分引用的父级选择器。
 
-### Ranges in partial references
+### 部分引用中指定范围
 
-`^[N..M]` anywhere in a selector, where both `N` and `M` can be numbers, represents a partial reference.
+`^[N..M]`可以出现在选择器中任何地方，`N`和`M`都是数字，代表一个部分引用。
 
-If you'd have a case when you'd need to get the raw part of the selector, or to get the range of parts programmatically, you could use ranges inside partial reference.
+假设你需要获取一部分选择器，或者程序中需要获取一个范围，你可以在部分引用中指定范围。
 
-If the range would start from the positive value, the result won't contain the selectors of the previous levels and you'd get the result as if the selectors of those levels were inserted at the root of the stylesheet with the combinators omitted:
+如果范围从正数开始，则选取结果中将不包含之前的选择器，并且获取的结果部分的选择器层级像是在样式表的根(样式表的最左边)开始写的一样：
 
-    .foo
-      & .bar
-        width: 10px
+```stylus
+.foo
+  & .bar
+    width: 10px
 
-        ^[0]:hover ^[1..-1]
-          width: 20px
+    ^[0]:hover ^[1..-1]
+      width: 20px
+```
 
-would be rendered as
+结果：
+```css
+.foo .bar {
+  width: 10px;
+}
+.foo:hover .bar {
+  width: 20px;
+}
+```
 
-    .foo .bar {
-      width: 10px;
-    }
-    .foo:hover .bar {
-      width: 20px;
-    }
+范围中的第一个数字为起始下标，第二个为结束下标。注意数字的顺序无所谓，因为选择器总是从第一层向最后一层渲染，所以`^[1..-1]`和`^[-1..1]`是相等的。
 
-One number in the range would be the start index, the second — the end index. Note that the order of those numbers won't matter as the selectors would always render from the first levels to the last, so `^[1..-1]` would be equal to the `^[-1..1]`.
+当两个数字相等时，结果只是选择器中的一个层级，所以你可以用前面例子中的`^[-1..-1]`来代替`^[1..-1]`，它也表示最后一个选择器，但是当用在mixins中时更可靠。
 
-When both numbers are equal, the result would be just one raw level of a selector, so you could replace `^[1..-1]` in a previous example to `^[-1..-1]`, and it would be equal to the same last one raw selector, but would be more reliable if used inside mixins.
+## 初始化引用
 
-## Initial Reference
+选择器开头的`~/`可以用来指向第一层选择器，可以认为是`^[0]`的简写。唯一的缺点是你只能在一个选择器的开始使用初始化引用。
 
-The `~/` characters at the start of a selector can be used to point at the selector at the first nesting and could be considered as a shortcut to `^[0]`. The only drawback is that you can use initial reference only at the start of a selector:
+```stylus
+.block
+  &__element
+    ~/:hover &
+      color: red
+```
 
-    .block
-      &__element
-        ~/:hover &
-          color: red
+结果：
 
-Would be rendered as
-
-    .block:hover .block__element {
-      color: #f00;
-    }
+```css
+.block:hover .block__element {
+  color: #f00;
+}
+```
 
 ## Relative Reference
 

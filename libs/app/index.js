@@ -8,7 +8,7 @@ exports = module.exports = {
     app.set('views', './views/docs')
     app.engine('html', ejs.__express)
     app.set('view engine', 'html')
-    app.set('PORT', process.env.PORT || 3000)
+    app.set('PORT', process.env.PORT || 8080)
 
     // static resources
     app.use(express.static('./static'))
